@@ -5,12 +5,16 @@
 
     public abstract class Move
     {
-        protected Color PlayerColor;
+        public Color PlayerColor { get; }
 
         protected Move(Color playerColor)
         {
             PlayerColor = playerColor;
         }
+
+        public abstract MoveValidationResult Validate(IQuoridorField field);
+
+        public abstract void Execute(IQuoridorField field);
     }
 
     public class UnknownMove : Move
@@ -18,38 +22,35 @@
         public UnknownMove(Color playerColor) : base(playerColor)
         {
         }
+
+        public override MoveValidationResult Validate(IQuoridorField field)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Execute(IQuoridorField field)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     public class JumpMove : Move
     {
         private Position movePosition;
-        
+
         public JumpMove(Color playerColor, Position movePosition) : base(playerColor)
         {
             this.movePosition = movePosition;
         }
-    }
-    
-    public class PlaceWallMove : Move
-    {
-        private Position wallPosition;
 
-        private WallType wallType;
-        
-        public PlaceWallMove(Color playerColor, Position wallPosition, WallType wallType) : base(playerColor)
+        public override MoveValidationResult Validate(IQuoridorField field)
         {
-            this.wallPosition = wallPosition;
-            this.wallType = wallType;
+            throw new System.NotImplementedException();
         }
-    }
-    
-    public class PawnStepMove : Move
-    {
-        private Position movePosition;
 
-        public PawnStepMove(Color playerColor, Position movePosition) : base(playerColor)
+        public override void Execute(IQuoridorField field)
         {
-            this.movePosition = movePosition;
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -4,26 +4,21 @@ namespace Quoridor.Client
 {
     using Core.Field;
     using Core.Game;
+    using Core.Moves;
 
-    class Program
+    class TwoPlayersQuoridorClient
     {
         static void Main(string[] args)
         {
-            
-            var myColor = ReadColor();
-            var game = new QuoridorGame(new QuoridorField());
-
-            if (myColor == Color.White)
-            {
-                MakeMove(game, myColor);
-            }
+            new TwoPlayersQuoridorCommandLineRunner().RunSingleGame();
         }
 
         private static void MakeMove(QuoridorGame game, Color myColor)
         {
-            
         }
-        
+
+
+
         private static Color ReadColor()
         {
             var line = Console.ReadLine();

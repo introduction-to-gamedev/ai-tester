@@ -4,6 +4,8 @@
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.QuoridorBoardTests.AfterCreation_PawnsShouldBeOnRightPositions&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.MoveParserTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.PositionParserTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.QuoridorBoardTests.ShouldReturnCellOrNull&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.MoveTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Quoridor/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

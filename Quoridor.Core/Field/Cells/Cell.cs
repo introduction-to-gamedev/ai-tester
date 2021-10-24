@@ -1,25 +1,21 @@
 ﻿namespace Quoridor.Core.Field
 {
+    using System;
+    using System.Collections.Generic;
     using IntroToGameDev.AiTester.Utils;
 
-    public interface ICell
-    {
-        Position Position { get; }
-        
-        bool IsOccupied { get; }
-        
-        Pawn Pawn { get; }
-    }
-    
     public class Cell : ICell
     {
         public Position Position { get; }
         public bool IsOccupied => Pawn != null;
         public Pawn Pawn { get; private set; }
 
-        public Cell(Position position)
+        private readonly Func<ICell, IEnumerable<ICell>> neighboursGetter;
+
+        public Cell(Position position, Func<ICell, IEnumerable<ICell>> neighboursGetter)
         {
             Position = position;
+            this.neighboursGetter = neighboursGetter;
         }
 
         public void BlockWayTo(Cell cell)
@@ -30,6 +26,11 @@
         public void Place(Pawn pawn)
         {
             Pawn = pawn;
+        }
+
+        public IEnumerable<ICell> GetAccessibleNeighbours()
+        {
+            return neighboursGetter(this);
         }
 
         public void ClearPawn()
