@@ -1,4 +1,4 @@
-# Reversi AI Tester
+# Quoridor AI Tester
 
 Usage of quoridor-ai tester executable:
 
