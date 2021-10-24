@@ -13,6 +13,7 @@
         void MovePawnTo(Color pawnColor, Position position);
 
         void PlaceWall(Wall wall);
+        
         void RemoveWall(Wall wall);
         
         IReadOnlyList<Wall> Walls { get; }

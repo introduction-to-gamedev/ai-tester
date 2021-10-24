@@ -3,13 +3,14 @@
     using System.Linq;
     using Field;
     using IntroToGameDev.AiTester.Utils;
+    using Pathfinder;
 
     public class PlaceWallMove : Move
     {
-        private Position wallPosition;
+        private readonly Position wallPosition;
 
-        private WallType wallType;
-
+        private readonly WallType wallType;
+        
         public PlaceWallMove(Color playerColor, Position wallPosition, WallType wallType) : base(playerColor)
         {
             this.wallPosition = wallPosition;
@@ -44,6 +45,17 @@
                 return MoveValidationResult.Invalid("This position is blocked by horizontal wall nearby");
             }
 
+            var wall = new Wall(wallType, wallPosition, PlayerColor);
+            field.PlaceWall(wall);
+            var checker = new QuoridorPathChecker(field);
+            var wayExists = checker.PathForBothPlayersExist();
+            field.RemoveWall(wall);
+
+            if (!wayExists)
+            {
+                return MoveValidationResult.Invalid("Wall can not block path to goal cells");
+            }
+            
             return MoveValidationResult.Valid;
         }
 

@@ -118,6 +118,19 @@
             Validate(new JumpMove(Color.White, GetCellPosition("G9")), false);
             Validate(new JumpMove(Color.White, GetCellPosition("F8")), true);
         }
+        
+        [Test]
+        public void WayBlockingShouldBeForbidden()
+        {
+            field.PlaceWall(new Wall(WallType.Horizontal, (0,0), Color.Black));
+            field.PlaceWall(new Wall(WallType.Horizontal, (0,2), Color.Black));
+            field.PlaceWall(new Wall(WallType.Horizontal, (0,4), Color.Black));
+            field.PlaceWall(new Wall(WallType.Horizontal, (0,6), Color.Black));
+            
+            field.PlaceWall(new Wall(WallType.Horizontal, (1,7), Color.Black));
+            
+            Validate(new PlaceWallMove(Color.White, (1, 6), WallType.Vertical), false);
+        }
 
         private Position GetCellPosition(string code)
         {
