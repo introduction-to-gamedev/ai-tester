@@ -2,18 +2,20 @@
 {
     using Field;
 
-    public interface IMoveParser
+    public interface IMoveConverter
     {
-        Move ParseMove(string input, Color color); 
+        Move ParseMove(string input, Color color);
+
+        string GetCode(Move move);
     }
 
-    public class MoveParser : IMoveParser
+    public class MoveConverter : IMoveConverter
     {
-        private readonly IPositionParser positionParser;
+        private readonly IPositionConverter positionConverter;
 
-        public MoveParser(IPositionParser positionParser)
+        public MoveConverter(IPositionConverter positionConverter)
         {
-            this.positionParser = positionParser;
+            this.positionConverter = positionConverter;
         }
 
         public Move ParseMove(string input, Color color)
@@ -28,7 +30,7 @@
             switch (commands[0])
             {
                 case "move":
-                    var cellPosition = positionParser.TryParseCellPosition(argument);
+                    var cellPosition = positionConverter.TryParseCellPosition(argument);
                     if (cellPosition.HasValue)
                     {
                         return new PawnStepMove(color, cellPosition.Value);
@@ -36,7 +38,7 @@
                     break;
                 
                 case "jump":
-                    cellPosition = positionParser.TryParseCellPosition(argument);
+                    cellPosition = positionConverter.TryParseCellPosition(argument);
                     if (cellPosition.HasValue)
                     {
                         return new JumpMove(color, cellPosition.Value);
@@ -44,7 +46,7 @@
                     break;
                 
                 case "wall":
-                    var wallPosition = positionParser.TryParseWallPosition(argument);
+                    var wallPosition = positionConverter.TryParseWallPosition(argument);
                     if (wallPosition.HasValue)
                     {
                         var valueTuple = wallPosition.Value;
@@ -54,6 +56,21 @@
             }
 
             return new UnknownMove(color);
+        }
+
+        public string GetCode(Move move)
+        {
+            switch (move)
+            {
+                case JumpMove jump:
+                    return $"jump {positionConverter.CellPositionToCode(jump.MovePosition)}";
+                case PlaceWallMove wall:
+                    return $"wall {positionConverter.WallPositionToCode(wall.WallPosition, wall.WallType)}";
+                case PawnStepMove step:
+                    return $"move {positionConverter.CellPositionToCode(step.MovePosition)}";
+            }
+
+            return "unknown";
         }
     }
 }

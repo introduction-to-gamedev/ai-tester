@@ -7,19 +7,19 @@
 
     public class PlaceWallMove : Move
     {
-        private readonly Position wallPosition;
+        public Position WallPosition { get; }
 
-        private readonly WallType wallType;
+        public WallType WallType { get; }
         
         public PlaceWallMove(Color playerColor, Position wallPosition, WallType wallType) : base(playerColor)
         {
-            this.wallPosition = wallPosition;
-            this.wallType = wallType;
+            WallPosition = wallPosition;
+            WallType = wallType;
         }
 
         public override MoveValidationResult Validate(IQuoridorField field)
         {
-            if (field.Walls.Any(wall => wall.Position == wallPosition))
+            if (field.Walls.Any(wall => wall.Position == WallPosition))
             {
                 return MoveValidationResult.Invalid("There is already a wall in provided position");
             }
@@ -29,23 +29,23 @@
                 return MoveValidationResult.Invalid("You can place only 10 walls in game");
             }
 
-            if (wallType == WallType.Horizontal
+            if (WallType == WallType.Horizontal
                 && field.Walls.Any(wall => wall.Type == WallType.Horizontal
-                                           && (wall.Position == wallPosition + (0, 1) ||
-                                               wall.Position == wallPosition + (0, -1))))
+                                           && (wall.Position == WallPosition + (0, 1) ||
+                                               wall.Position == WallPosition + (0, -1))))
             {
                 return MoveValidationResult.Invalid("This position is blocked by horizontal wall nearby");
             }
             
-            if (wallType == WallType.Vertical
+            if (WallType == WallType.Vertical
                 && field.Walls.Any(wall => wall.Type == WallType.Vertical
-                                           && (wall.Position == wallPosition + (1, 0) ||
-                                               wall.Position == wallPosition + (-1, 0))))
+                                           && (wall.Position == WallPosition + (1, 0) ||
+                                               wall.Position == WallPosition + (-1, 0))))
             {
                 return MoveValidationResult.Invalid("This position is blocked by horizontal wall nearby");
             }
 
-            var wall = new Wall(wallType, wallPosition, PlayerColor);
+            var wall = new Wall(WallType, WallPosition, PlayerColor);
             field.PlaceWall(wall);
             var checker = new QuoridorPathChecker(field);
             var wayExists = checker.PathForBothPlayersExist();
@@ -61,7 +61,7 @@
 
         public override void Execute(IQuoridorField field)
         {
-            field.PlaceWall(new Wall(wallType, wallPosition, PlayerColor));
+            field.PlaceWall(new Wall(WallType, WallPosition, PlayerColor));
         }
     }
 }

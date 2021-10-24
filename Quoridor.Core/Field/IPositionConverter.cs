@@ -3,14 +3,18 @@
     using IntroToGameDev.AiTester.Utils;
     using Moves;
 
-    public interface IPositionParser
+    public interface IPositionConverter
     {
         Position? TryParseCellPosition(string code);
         
         (Position position, WallType wall)? TryParseWallPosition(string code);
+
+        string CellPositionToCode(Position position);
+        
+        string WallPositionToCode(Position position, WallType type);
     }
 
-    public class PositionParser : IPositionParser
+    public class PositionConverter : IPositionConverter
     {
         public Position? TryParseCellPosition(string code)
         {
@@ -36,7 +40,17 @@
             
             return (position.Value, wallType);
         }
-        
+
+        public string CellPositionToCode(Position position)
+        {
+            return $"{(char)('A' + position.Column)}{position.Row + 1}";
+        }
+
+        public string WallPositionToCode(Position position, WallType type)
+        {
+            return $"{(char)('S' + position.Column)}{position.Row + 1}{(type == WallType.Horizontal? 'h' : 'v')}";
+        }
+
         private Position? TryParse(string code, char startSymbol, int limit)
         {
             if (code == null)

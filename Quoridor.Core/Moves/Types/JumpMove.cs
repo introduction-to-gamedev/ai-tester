@@ -6,19 +6,19 @@ namespace Quoridor.Core.Moves
 
     public class JumpMove : Move
     {
-        private Position movePosition;
+        public Position MovePosition { get;  }
 
         private readonly IPossibleJumpMovesProvider jumpMovesProvider = new PossibleJumpMovesProvider();
 
         public JumpMove(Color playerColor, Position movePosition) : base(playerColor)
         {
-            this.movePosition = movePosition;
+            MovePosition = movePosition;
         }
 
         public override MoveValidationResult Validate(IQuoridorField field)
         {
             var possibleJumps = jumpMovesProvider.GetPossibleJumpPositions(field, PlayerColor);
-            if (!possibleJumps.Contains(movePosition))
+            if (!possibleJumps.Contains(MovePosition))
             {
                 return MoveValidationResult.Invalid("Can not jump to provided position");
             }
@@ -28,7 +28,7 @@ namespace Quoridor.Core.Moves
 
         public override void Execute(IQuoridorField field)
         {
-            field.MovePawnTo(PlayerColor, movePosition);
+            field.MovePawnTo(PlayerColor, MovePosition);
         }
     }
 }

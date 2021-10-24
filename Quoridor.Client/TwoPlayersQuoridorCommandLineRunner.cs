@@ -11,7 +11,7 @@
     {
         private readonly QuoridorGame game = new QuoridorGame(new QuoridorField());
 
-        private readonly IMoveParser moveParser = new MoveParser(new PositionParser());
+        private readonly IMoveConverter moveConverter = new MoveConverter(new PositionConverter());
 
         public void RunSingleGame()
         {
@@ -40,7 +40,7 @@
 
         private Move ReadMove(Color activeColor)
         {
-            return moveParser.ParseMove(Console.ReadLine(), activeColor);
+            return moveConverter.ParseMove(Console.ReadLine(), activeColor);
         }
 
         private void DrawField()

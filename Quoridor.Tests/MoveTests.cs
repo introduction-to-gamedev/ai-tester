@@ -10,7 +10,7 @@
     {
         private IQuoridorField field;
 
-        private IPositionParser positionParser = new PositionParser();
+        private IPositionConverter positionConverter = new PositionConverter();
 
         [SetUp]
         public void SetUp()
@@ -134,12 +134,12 @@
 
         private Position GetCellPosition(string code)
         {
-            return positionParser.TryParseCellPosition(code).Value;
+            return positionConverter.TryParseCellPosition(code).Value;
         }
         
         private Position GetWallPosition(string code)
         {
-            return positionParser.TryParseWallPosition(code).Value.position;
+            return positionConverter.TryParseWallPosition(code).Value.position;
         }
     }
 }

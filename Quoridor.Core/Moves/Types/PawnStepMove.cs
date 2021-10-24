@@ -6,23 +6,23 @@ namespace Quoridor.Core.Moves
 
     public class PawnStepMove : Move
     {
-        private readonly Position movePosition;
+        public Position MovePosition { get; }
 
         public PawnStepMove(Color playerColor, Position movePosition) : base(playerColor)
         {
-            this.movePosition = movePosition;
+            MovePosition = movePosition;
         }
 
         public override MoveValidationResult Validate(IQuoridorField field)
         {
             var currentCell = field.GetCellWithPawn(PlayerColor);
             var currentPos = currentCell.Position;
-            if (currentPos == movePosition)
+            if (currentPos == MovePosition)
             {
                 return MoveValidationResult.Invalid("Can not move pawn to it's current location");
             }
 
-            var cell = field.GetCell(movePosition);
+            var cell = field.GetCell(MovePosition);
             if (cell.IsOccupied)
             {
                 return MoveValidationResult.Invalid("Can not move pawn to occupied cell");
@@ -39,7 +39,7 @@ namespace Quoridor.Core.Moves
 
         public override void Execute(IQuoridorField field)
         {
-            field.MovePawnTo(PlayerColor, movePosition);
+            field.MovePawnTo(PlayerColor, MovePosition);
         }
     }
 }

@@ -15,21 +15,4 @@
 
         public abstract void Execute(IQuoridorField field);
     }
-
-    public class UnknownMove : Move
-    {
-        public UnknownMove(Color playerColor) : base(playerColor)
-        {
-        }
-
-        public override MoveValidationResult Validate(IQuoridorField field)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Execute(IQuoridorField field)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
 }
