@@ -64,7 +64,7 @@
             {
                 path.Insert(0, temp.Node);
                 temp = temp.Parent;
-            } while (!temp.Has(start) && temp != null);
+            } while (temp != null && !temp.Has(start));
 
             return path;
         }

@@ -14,4 +14,12 @@
     {
         White, Black
     }
+
+    public static class ColorExtensions
+    {
+        public static Color Opposite(this Color color)
+        {
+            return color == Color.Black ? Color.White : Color.Black;
+        }
+    }
 }

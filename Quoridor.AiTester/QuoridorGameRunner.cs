@@ -18,6 +18,8 @@
         private readonly IMoveConverter moveConverter = new MoveConverter(new PositionConverter());
         
         private readonly IPossibleMovesProvider movesProvider = new PossibleMovesProvider();
+
+        private readonly IMoveChoosingStrategy strategy = new SimpleMoveChoosingStrategy();
         
         public override async Task<SingleTestResult> Play(ILogger logger, StreamWriter input, StreamReader output)
         {
@@ -45,7 +47,7 @@
                 else
                 {
                     var moves = movesProvider.GetPossibleMoves(field, myColor);
-                    move = moves[random.Next(moves.Count)];
+                    move = strategy.ChooseMove(moves, field, myColor);
                     var code = moveConverter.GetCode(move);
                     
                     logger.Log(LogLevel.Info, $"-> {code}");

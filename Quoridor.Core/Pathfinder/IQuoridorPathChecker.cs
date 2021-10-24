@@ -9,6 +9,8 @@
         bool IsWayToTheEndExists(Color color);
         
         bool PathForBothPlayersExist();
+
+        IEnumerable<ICell> GetGoalCells(Color color);
     }
 
     public class QuoridorPathChecker : IQuoridorPathChecker
@@ -39,7 +41,7 @@
             return IsWayToTheEndExists(Color.Black) && IsWayToTheEndExists(Color.White);
         }
 
-        private IEnumerable<ICell> GetGoalCells(Color color)
+        public IEnumerable<ICell> GetGoalCells(Color color)
         {
             for (var column = 0; column < 9; column++)
             {

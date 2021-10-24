@@ -16,7 +16,7 @@
         private readonly IMoveConverter moveConverter = new MoveConverter(new PositionConverter());
 
         private readonly IPossibleMovesProvider movesProvider = new PossibleMovesProvider();
-        
+
         public void RunSingleGame()
         {
             var field = game.Field;

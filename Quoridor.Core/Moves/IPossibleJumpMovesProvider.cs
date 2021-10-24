@@ -7,12 +7,12 @@ namespace Quoridor.Core.Moves
 
     public interface IPossibleJumpMovesProvider
     {
-        IEnumerable<Position> GetPossibleJumpPositions(IQuoridorField field, Color color);
+        IEnumerable<(Position jump, Position pawn)> GetPossibleJumpPositions(IQuoridorField field, Color color);
     }
 
     public class PossibleJumpMovesProvider : IPossibleJumpMovesProvider
     {
-        public IEnumerable<Position> GetPossibleJumpPositions(IQuoridorField field, Color color)
+        public IEnumerable<(Position jump, Position pawn)> GetPossibleJumpPositions(IQuoridorField field, Color color)
         {
             var pawn = field.GetCellWithPawn(color);
             foreach (var offset in GetOffsets())
@@ -32,7 +32,7 @@ namespace Quoridor.Core.Moves
                 var jumpCandidate = field.GetCell(cellWithOffset.Position + offset);
                 if (jumpCandidate != null && cellWithOffset.HasWayTo(jumpCandidate))
                 {
-                    yield return jumpCandidate.Position;
+                    yield return (jumpCandidate.Position, cellWithOffset.Position);
                 }
                 else
                 {
@@ -41,13 +41,13 @@ namespace Quoridor.Core.Moves
                         var candidate = TryGetAccessibleCell(cellWithOffset, (0, 1));
                         if (candidate != null)
                         {
-                            yield return candidate.Position;
+                            yield return (candidate.Position, cellWithOffset.Position);
                         }
                         
                         candidate = TryGetAccessibleCell(cellWithOffset, (0, -1));
                         if (candidate != null)
                         {
-                            yield return candidate.Position;
+                            yield return (candidate.Position, cellWithOffset.Position);
                         }
                         
                     }
@@ -56,13 +56,13 @@ namespace Quoridor.Core.Moves
                         var candidate = TryGetAccessibleCell(cellWithOffset, (1, 0));
                         if (candidate != null)
                         {
-                            yield return candidate.Position;
+                            yield return (candidate.Position, cellWithOffset.Position);
                         }
                         
                         candidate = TryGetAccessibleCell(cellWithOffset, (-1, 0));
                         if (candidate != null)
                         {
-                            yield return candidate.Position;
+                            yield return (candidate.Position, cellWithOffset.Position);
                         }
                     }
                 }

@@ -17,9 +17,9 @@
         {
             var result = new List<Move>();
 
-            foreach (var position in jumpMovesProvider.GetPossibleJumpPositions(field, color))
+            foreach (var (position, pawn) in jumpMovesProvider.GetPossibleJumpPositions(field, color))
             {
-                result.Add(new JumpMove(color, position));
+                result.Add(new JumpMove(color, position, pawn));
             }
 
             for (var x = 0; x < 8; x++)

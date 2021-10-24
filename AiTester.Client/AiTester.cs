@@ -36,11 +36,14 @@
                 logger.Log(LogLevel.Info, "Executing full test...");
 
                 var aggregated = new ResultsAggregator().Aggregate(await Task.WhenAll(Enumerable.Range(1, 100)
-                    .Select(index =>
+                    .Select(async index =>
                     {
                         logger.Log(LogLevel.Info, $"----------------------");
                         logger.Log(LogLevel.Info, $"Executing run #{index}");
-                        return new SingleTestExecutor(logger, new T()).Execute(options.RunCommand);
+                        var result = await new SingleTestExecutor(logger, new T()).Execute(options.RunCommand);
+                        logger.Log(result.IsCompletedSuccessfully ? LogLevel.Info : LogLevel.Error,
+                            $"{result.Type} {result.Error}");
+                        return result;
                     })));
 
                 Console.WriteLine(aggregated);
