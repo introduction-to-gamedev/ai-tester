@@ -11,13 +11,16 @@
     {
         private readonly TaskCompletionSource<SingleTestResult> processExitCts = new();
 
-        private readonly StringBuilder errorsBuilder = new StringBuilder();
+        private readonly StringBuilder errorsBuilder = new();
 
         private readonly ILogger logger;
 
-        public SingleTestExecutor(Logger logger)
+        private readonly IGameRunner gameRunner;
+
+        public SingleTestExecutor(Logger logger, IGameRunner gameRunner)
         {
             this.logger = logger;
+            this.gameRunner = gameRunner;
         }
 
         public async Task<SingleTestResult> Execute(string command)
@@ -81,6 +84,8 @@
             {
                 var output = process.StandardOutput;
                 var input = process.StandardInput;
+
+                return await gameRunner.Play(logger, input, output);
             }
             catch (Exception e)
             {
@@ -92,35 +97,10 @@
                 process.Exited -= OnProcessOnExited;
                 logger.Log(LogLevel.Info, "Killing client process...");
                 process.Kill();
-                logger.Log(LogLevel.Info, $"Child process killed: {process.HasExited}");
             }
         }
 
 
-        private ValueOrError<string> FetchNextCommand(StreamReader sr)
-        {
-            var delayTask = Task.Delay(TimeSpan.FromSeconds(1));
-            string nextCommand = null;
-            while (IsNullOrComment(nextCommand) && !delayTask.IsCompleted)
-            {
-                nextCommand = sr.ReadLine();
-                if (nextCommand != null && nextCommand.StartsWith("//"))
-                {
-                    logger.Log(LogLevel.Info, nextCommand);
-                }
-            }
-
-            if (nextCommand != null)
-            {
-                return ValueOrError.FromValue(nextCommand);
-            }
-
-            return ValueOrError.FromError<string>("Error: timeout of reading next command reached");
-
-            bool IsNullOrComment(string value)
-            {
-                return value == null || value.StartsWith("//");
-            }
-        }
+      
     }
 }
