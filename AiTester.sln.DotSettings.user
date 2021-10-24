@@ -11,6 +11,8 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ee243685_002Dbb94_002D4c58_002D8359_002Dcc8773ccc441/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AllowCorrectBlockedJumpMoves" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.MoveTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.PathFinderTests.ShouldFindWay&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.PathFinderTests.WallsShouldBlockWay&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Quoridor/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

@@ -4,11 +4,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using IntroToGameDev.AiTester.Utils;
+    using Pathfinder;
 
     public class Cell : ICell
     {
         public Position Position { get; }
+        
         public bool IsOccupied => Pawn != null;
+        
         public Pawn Pawn { get; private set; }
 
         private readonly Func<Position, ICell> cellGetter;
@@ -57,6 +60,11 @@
             yield return cellGetter(Position + (0, 1));
             yield return cellGetter(Position + (-1, 0));
             yield return cellGetter(Position + (0, -1));
+        }
+
+        public override string ToString()
+        {
+            return $"[{Position}]";
         }
     }
 }

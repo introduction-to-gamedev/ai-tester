@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using IntroToGameDev.AiTester.Utils;
+    using Pathfinder;
 
-    public interface ICell
+    public interface ICell : INode<ICell>
     {
         Position Position { get; }
         
@@ -15,7 +16,6 @@
 
         void Place(Pawn pawn);
 
-        IEnumerable<ICell> GetAccessibleNeighbours();
 
         bool HasWayTo(ICell cell);
         
