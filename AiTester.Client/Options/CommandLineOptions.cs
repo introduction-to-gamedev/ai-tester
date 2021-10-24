@@ -4,9 +4,6 @@
 
     public class CommandLineOptions
     {
-        [Option("game", Required = true, HelpText = "Game you want to test. Reversi and Quoridor are currently supported")]
-        public string Game { get; set; } 
-        
         [Option("command", Required = true, HelpText = "Command line script to start your client")]
         public string RunCommand { get; set; }
         

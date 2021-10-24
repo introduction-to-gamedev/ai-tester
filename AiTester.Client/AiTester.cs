@@ -7,7 +7,7 @@
     using NLog.Targets;
     using Options;
 
-    class AiTester
+    public abstract class AiTester
     {
         static void Main(string[] args)
         {
