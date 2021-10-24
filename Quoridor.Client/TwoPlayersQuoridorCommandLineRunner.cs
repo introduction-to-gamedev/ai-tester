@@ -20,7 +20,17 @@
             while (!game.IsOver)
             {
                 DrawField();
-                var move = ReadMove(game.ActiveColor);
+                Move move;
+                MoveValidationResult validationResult;
+                do
+                {
+                    move = ReadMove(game.ActiveColor);
+                    validationResult = move.Validate(game.Field);
+                    if (!validationResult.IsValid)
+                    {
+                        Console.WriteLine($"Wrong move: {validationResult.Error}. Please, enter correct move");
+                    }
+                } while (!validationResult.IsValid);
                 game.ExecuteMove(move);
             }
 
@@ -43,12 +53,17 @@
 
             var spacesAmount = 5;
 
+            Console.WriteLine($"      {GetRowWithBlanks(i => (char) ('s' + i), spacesAmount, size - 1)}");
             Console.WriteLine($"+  {GetRowWithBlanks(i => (char) ('A' + i), spacesAmount, size)}");
+            
             for (var x = 1; x <= size; x++)
             {
                 var row = x - 1;
                 field[row * 2] = $"{x}  {GetRowWithBlanks(y => GetCellSymbol(row, y), spacesAmount, size)}";
-                field[row * 2 + 1] = new string(' ', (spacesAmount + 1) * size);
+                if (x < 9)
+                {
+                    field[row * 2 + 1] = new string(' ', (spacesAmount + 1) * size) + $"{x}";
+                }
             }
 
             foreach (var wall in game.Field.Walls)
@@ -98,7 +113,7 @@
                     sb.Append(' ', spaces);
                 }
 
-                sb.Append(getSymbol(repeat));
+                sb.Append(getSymbol(repeat - 1));
                 return sb.ToString();
             }
 

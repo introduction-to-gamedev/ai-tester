@@ -16,5 +16,11 @@
         void Place(Pawn pawn);
 
         IEnumerable<ICell> GetAccessibleNeighbours();
+
+        bool HasWayTo(ICell cell);
+        
+        void BlockWayTo(ICell cell);
+        
+        void UnblockWayTo(ICell cell);
     }
 }

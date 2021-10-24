@@ -27,7 +27,23 @@
             {
                 return MoveValidationResult.Invalid("You can place only 10 walls in game");
             }
+
+            if (wallType == WallType.Horizontal
+                && field.Walls.Any(wall => wall.Type == WallType.Horizontal
+                                           && (wall.Position == wallPosition + (0, 1) ||
+                                               wall.Position == wallPosition + (0, -1))))
+            {
+                return MoveValidationResult.Invalid("This position is blocked by horizontal wall nearby");
+            }
             
+            if (wallType == WallType.Vertical
+                && field.Walls.Any(wall => wall.Type == WallType.Vertical
+                                           && (wall.Position == wallPosition + (1, 0) ||
+                                               wall.Position == wallPosition + (-1, 0))))
+            {
+                return MoveValidationResult.Invalid("This position is blocked by horizontal wall nearby");
+            }
+
             return MoveValidationResult.Valid;
         }
 

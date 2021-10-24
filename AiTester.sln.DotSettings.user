@@ -1,10 +1,15 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=aa7d8ea7_002D5f8c_002D4d49_002D8fe9_002Da83effca54ab/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AfterCreation_PawnsShouldBeOnRightPositions" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=aa7d8ea7_002D5f8c_002D4d49_002D8fe9_002Da83effca54ab/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AfterCreation_PawnsShouldBeOnRightPositions" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.QuoridorBoardTests.AfterCreation_PawnsShouldBeOnRightPositions&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.MoveParserTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.PositionParserTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.QuoridorBoardTests.ShouldReturnCellOrNull&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.MoveTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ee243685_002Dbb94_002D4c58_002D8359_002Dcc8773ccc441/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AllowCorrectBlockedJumpMoves" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::4C561220-E68A-4176-AC94-FA01E1C80135::net5.0::Quoridor.Tests.MoveTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>

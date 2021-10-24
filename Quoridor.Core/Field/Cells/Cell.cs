@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using IntroToGameDev.AiTester.Utils;
 
     public class Cell : ICell
@@ -10,18 +11,30 @@
         public bool IsOccupied => Pawn != null;
         public Pawn Pawn { get; private set; }
 
-        private readonly Func<ICell, IEnumerable<ICell>> neighboursGetter;
+        private readonly Func<Position, ICell> cellGetter;
 
-        public Cell(Position position, Func<ICell, IEnumerable<ICell>> neighboursGetter)
+        private readonly List<ICell> blockedNeighbours = new();
+
+        public Cell(Position position, Func<Position, ICell> cellGetter)
         {
             Position = position;
-            this.neighboursGetter = neighboursGetter;
+            this.cellGetter = cellGetter;
         }
 
-        public void BlockWayTo(Cell cell)
+        public bool HasWayTo(ICell cell)
         {
-            
+            return GetAccessibleNeighbours().Contains(cell);
         }
+
+        public void BlockWayTo(ICell cell)
+        {
+            blockedNeighbours.Add(cell);
+        }
+
+        public void UnblockWayTo(ICell cell)
+        {
+            blockedNeighbours.Remove(cell);   
+        } 
 
         public void Place(Pawn pawn)
         {
@@ -30,12 +43,20 @@
 
         public IEnumerable<ICell> GetAccessibleNeighbours()
         {
-            return neighboursGetter(this);
+            return GetAllNeighbours().Where(c => c != null).Where(c => !blockedNeighbours.Contains(c));
         }
 
         public void ClearPawn()
         {
             Pawn = null;
+        }
+
+        private IEnumerable<ICell> GetAllNeighbours()
+        {
+            yield return cellGetter(Position + (1, 0));
+            yield return cellGetter(Position + (0, 1));
+            yield return cellGetter(Position + (-1, 0));
+            yield return cellGetter(Position + (0, -1));
         }
     }
 }

@@ -33,7 +33,7 @@
             {
                 for (var y = 0; y < cells.GetLength(0); y++)
                 {
-                    cells[x, y] = new Cell((x, y), GetAccessibleNeighbours);
+                    cells[x, y] = new Cell((x, y), GetCell);
                 }
             }
 
@@ -41,18 +41,7 @@
             cells[8, 4].Place(new Pawn(Color.White));
         }
 
-        private IEnumerable<ICell> GetAccessibleNeighbours(ICell cell)
-        {
-            return GetAllNeighbours(cell).Where(c => c != null);
-        }
-        
-        private IEnumerable<ICell> GetAllNeighbours(ICell cell)
-        {
-            yield return GetCell(cell.Position + (1, 0));
-            yield return GetCell(cell.Position + (0, 1));
-            yield return GetCell(cell.Position + (-1, 0));
-            yield return GetCell(cell.Position + (0, -1));
-        }
+       
 
         public ICell GetCellWithPawn(Color color)
         {
@@ -83,11 +72,31 @@
         public void PlaceWall(Wall wall)
         {
             walls.Add(wall);
+            foreach (var (a, b) in wall.GetBlockedCellPairs())
+            {
+                BlockMoveBetween(GetCell(a), GetCell(b));
+            }
+
+            void BlockMoveBetween(ICell a, ICell b)
+            {
+                a.BlockWayTo(b);
+                b.BlockWayTo(a);
+            }
         }
         
         public void RemoveWall(Wall wall)
         {
             walls.Remove(wall);
+            foreach (var (a, b) in wall.GetBlockedCellPairs())
+            {
+                UnblockMoveBetween(GetCell(a), GetCell(b));
+            }
+
+            void UnblockMoveBetween(ICell a, ICell b)
+            {
+                a.UnblockWayTo(b);
+                b.UnblockWayTo(a);
+            }
         }
 
     }
