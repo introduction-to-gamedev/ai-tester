@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics;
-    using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using NLog;
@@ -28,7 +28,8 @@
             Process process;
             try
             {
-                process = Process.Start(command);
+                string[] args = command.Split(" ");
+                process = Process.Start(args.First(), args.Skip(1));
                 if (process == null)
                 {
                     return SingleTestResult.FromError($"Can not start process, please check argument:\n {command}");
