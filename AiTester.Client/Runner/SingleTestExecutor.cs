@@ -28,12 +28,8 @@
             Process process;
             try
             {
-                string[] args = command.Split(" ");
+                var args = command.Split(" ");
                 process = Process.Start(args.First(), args.Skip(1));
-                if (process == null)
-                {
-                    return SingleTestResult.FromError($"Can not start process, please check argument:\n {command}");
-                }
 
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;

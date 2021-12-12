@@ -36,7 +36,7 @@
                 
                 if (game.ActiveColor == playersColor)
                 {
-                    var command = FetchNextCommand(logger, output);
+                    var command = Fetcher.FetchNextCommand(logger, output);
                     if (command == null)
                     {
                         return SingleTestResult.FromError("Could not fetch next command");
