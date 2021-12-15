@@ -39,7 +39,7 @@
             }
             catch (Exception e)
             {
-                logger.Log(LogLevel.Fatal, e);
+                //logger.Log(LogLevel.Fatal, e);
                 return null;
             }
             

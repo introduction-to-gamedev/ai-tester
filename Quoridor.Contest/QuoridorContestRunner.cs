@@ -1,20 +1,115 @@
 ﻿namespace Quoridor.Contest
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using AiTester.Contest;
     using NLog;
     using NLog.Config;
+    using NLog.Layouts;
     using NLog.Targets;
 
     public class QuoridorContestRunner
     {
         static async Task Main(string[] args)
         {
-            SetUpLogging();
-            
             var config = PrepareConfig();
-            await new Contest<QuoridorDuelRunner>(config, () => LogManager.LogFactory.GetLogger("Logger")).Execute();
+            var groups = GetGroups(config).ToList();
+            await new Contest<QuoridorDuelRunner>(config, new GroupDuelsProvider(groups),
+                data =>
+                {
+                    SetUpLoggingFor(data);
+                    return LogManager.LogFactory.GetLogger("Logger");
+                }).Execute();
+        }
+
+
+        private static void SetUpLoggingFor(DuelData duelData)
+        {
+            var config = new LoggingConfiguration();
+
+            Layout fileName =
+                $"{duelData.Group}/{duelData.FirstContestant.Id}-vs-{duelData.SecondContestant.Id}.log";
+            var logFile = new FileTarget("logfile") { FileName = fileName };
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logFile);
+            
+            var logConsole = new ConsoleTarget("logconsole");
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logConsole);
+
+            LogManager.Configuration = config;
+        }
+
+        private static IEnumerable<GroupConfig> GetGroups(ContestConfig config)
+        {
+            // yield return new GroupConfig()
+            // {
+            //     GroupLetter = "A",
+            //     Contestants = new List<ContestantConfig>()
+            //     {
+            //         config.GetContestantById("mike"),
+            //         config.GetContestantById("madagaskar"),
+            //         config.GetContestantById("alpha"),
+            //         config.GetContestantById("whiskey"),
+            //         config.GetContestantById("india"),
+            //         config.GetContestantById("romeo"),
+            //     }
+            // };
+
+            // yield return new GroupConfig()
+            // {
+            //     GroupLetter = "B",
+            //     Contestants = new List<ContestantConfig>()
+            //     {
+            //         config.GetContestantById("xmas"),
+            //         config.GetContestantById("casablanca"),
+            //         config.GetContestantById("juilett"),
+            //         config.GetContestantById("bravo"),
+            //         config.GetContestantById("florida"),
+            //         config.GetContestantById("victor"),
+            //     }
+            // };
+
+            yield return new GroupConfig()
+            {
+                GroupLetter = "C",
+                Contestants = new List<ContestantConfig>()
+                {
+                    config.GetContestantById("milku"),
+                    config.GetContestantById("oslo"),
+                    config.GetContestantById("queen"),
+                    config.GetContestantById("jerusalem"),
+                    config.GetContestantById("paris"),
+                    config.GetContestantById("toronto"),
+                }
+            };
+
+            yield return new GroupConfig()
+            {
+                GroupLetter = "D",
+                Contestants = new List<ContestantConfig>()
+                {
+                    config.GetContestantById("yankee"),
+                    config.GetContestantById("foxtrot"),
+                    config.GetContestantById("november"),
+                    config.GetContestantById("delta"),
+                    config.GetContestantById("yokohama"),
+                    config.GetContestantById("kilo"),
+                }
+            };
+
+            yield return new GroupConfig()
+            {
+                GroupLetter = "E",
+                Contestants = new List<ContestantConfig>()
+                {
+                    config.GetContestantById("oscar"),
+                    config.GetContestantById("zurich"),
+                    config.GetContestantById("king"),
+                    config.GetContestantById("charlie"),
+                    config.GetContestantById("sierra"),
+                    config.GetContestantById("hotel"),
+                }
+            };
         }
 
         private static ContestConfig PrepareConfig()
@@ -33,28 +128,154 @@
                     {
                         Id = "bravo",
                         Command = "QuoridorConsole.exe"
-                    }
+                    },
+                    new()
+                    {
+                        Id = "casablanca",
+                        Command = "main.exe"
+                    },
+                    new()
+                    {
+                        Id = "charlie",
+                        Command = "Quoridor.AiTestClient.exe"
+                    },
+                    new()
+                    {
+                        Id = "csharp",
+                        Command = "Bot.exe"
+                    },
+                    new()
+                    {
+                        Id = "delta",
+                        Command = "QuoridorConsole.exe"
+                    },
+                    new()
+                    {
+                        Id = "florida",
+                        Command = "QuoridorConsole.exe"
+                    },
+                    new()
+                    {
+                        Id = "foxtrot",
+                        Command = "ConsoleTestProgram.exe"
+                    },
+                    new()
+                    {
+                        Id = "hotel",
+                        Command = "GameDev.exe"
+                    },
+                    new()
+                    {
+                        Id = "india",
+                        Command = "main.exe"
+                    },
+                    new()
+                    {
+                        Id = "jerusalem",
+                        Command = "QuorridorAI.exe"
+                    },
+                    new()
+                    {
+                        Id = "juilett",
+                        Command = "Quoridor.Console.App.PvAI.exe"
+                    },
+                    new()
+                    {
+                        Id = "kilo",
+                        Command = "QuoridorGame.exe"
+                    },
+                    new()
+                    {
+                        Id = "king",
+                        Command = "Qouridor.ConsoleAI.exe"
+                    },
+                    new()
+                    {
+                        Id = "madagaskar",
+                        Command = "start-bot.bat"
+                    },
+                    new()
+                    {
+                        Id = "mike",
+                        Command = "QuoridorCmd.exe"
+                    },
+                    new()
+                    {
+                        Id = "milku",
+                        Command = "lima.exe"
+                    },
+                    new()
+                    {
+                        Id = "november",
+                        Command = "Quoridor.Console.exe"
+                    },
+                    new()
+                    {
+                        Id = "oscar",
+                        Command = "Quoridor.exe"
+                    },
+                    new()
+                    {
+                        Id = "oslo",
+                        Command = "Quoridor.exe"
+                    },
+                    new()
+                    {
+                        Id = "paris",
+                        Command = "lab2.exe"
+                    },
+                    new()
+                    {
+                        Id = "queen",
+                        Command = "Quoridor.Console.App.exe"
+                    },
+                    new()
+                    {
+                        Id = "romeo",
+                        Command = "Controller.exe"
+                    },
+                    new()
+                    {
+                        Id = "sierra",
+                        Command = "Quoridor.exe"
+                    },
+                    new()
+                    {
+                        Id = "victor",
+                        Command = "Quoridor.exe"
+                    },
+                    new()
+                    {
+                        Id = "whiskey",
+                        Command = "Quoridor_AI.exe"
+                    },
+                    new()
+                    {
+                        Id = "xmas",
+                        Command = "Quoridor.Cnsl.App.exe"
+                    },
+                    new()
+                    {
+                        Id = "yankee",
+                        Command = "Quoridor.exe"
+                    },
+                    new()
+                    {
+                        Id = "yokohama",
+                        Command = "Quoridor.exe"
+                    },
+                    new()
+                    {
+                        Id = "zurich",
+                        Command = "Controller.exe"
+                    },
+                    new()
+                    {
+                        Id = "toronto",
+                        Command = "Quoridor.exe"
+                    },
                 }
             };
-        }
-        
-        private static void SetUpLogging()
-        {
-            var config = new LoggingConfiguration();
-
-            // if (commandLineOptions.WriteLogsToFile)
-            // {
-                // var logFile = new FileTarget("logfile") { FileName = "run_results.log" };
-                // config.AddRule(LogLevel.Info, LogLevel.Fatal, logFile);
-            // }
-
-            // if (commandLineOptions.WriteLogsToConsole)
-            // {
-                var logConsole = new ConsoleTarget("logconsole");
-                config.AddRule(LogLevel.Info, LogLevel.Fatal, logConsole);
-            // }
-
-            LogManager.Configuration = config;
         }
     }
 }

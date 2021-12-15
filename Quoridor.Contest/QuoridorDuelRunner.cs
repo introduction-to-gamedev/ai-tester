@@ -16,7 +16,7 @@
 
         private readonly IMoveConverter moveConverter = new MoveConverter(new PositionConverter());
 
-        public override async Task RunDuel(Contestant contestantA, Contestant contestantB)
+        public override async Task<string> RunDuel(Contestant contestantA, Contestant contestantB)
         {
             var rnd = new Random();
             var whitePlayer = rnd.NextDouble() > .5 ? contestantA : contestantB;
@@ -33,10 +33,12 @@
                 var activePlayer = game.ActiveColor == Color.Black ? blackPlayer : whitePlayer;
                 var passivePlayer = activePlayer == blackPlayer ? whitePlayer : blackPlayer;
                 
+                Console.WriteLine($"Fetching from {activePlayer.Id}");
                 var command = fetcher.FetchNextCommand(Logger, activePlayer.Output);
                 if (command == null)
                 {
-                    throw new Exception();
+                    Logger.Log(LogLevel.Info, $"Could not fetch command from {activePlayer.Id}, technical loss");
+                    return passivePlayer.Id;
                 }
                 
                 Logger.Log(LogLevel.Info, $"{activePlayer.Id}:\t {command}");
@@ -51,6 +53,7 @@
 
             var winner = game.GetWinnerColor() == Color.Black ? blackPlayer : whitePlayer;
             Logger.Log(LogLevel.Info, $"{winner.Id} wins!");
+            return winner.Id;
             
             async Task SendColorToContestant(Contestant contestant, Color color)
             {

@@ -6,7 +6,7 @@ namespace AiTester.Contest
 
     public interface IDuelRunner
     {
-        Task RunDuel(Contestant contestantA, Contestant contestantB);
+        Task<string> RunDuel(Contestant contestantA, Contestant contestantB);
     }
 
     public abstract class DuelRunner : IDuelRunner
@@ -18,6 +18,6 @@ namespace AiTester.Contest
             Logger = logger;
         }
         
-        public abstract Task RunDuel(Contestant contestantA, Contestant contestantB);
+        public abstract Task<string> RunDuel(Contestant contestantA, Contestant contestantB);
     }
 }
