@@ -35,6 +35,7 @@
                     return SingleTestResult.FromError($"Can not start process, please check argument:\n {command}");
                 }
 
+                process.StartInfo.WorkingDirectory = Directory.GetParent(args.First()).FullName;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardInput = true;
