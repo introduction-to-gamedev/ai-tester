@@ -1,5 +1,6 @@
 ﻿namespace AiTester.Contest.Contestants
 {
+    using System.IO;
     using IntroToGameDev.AiTester.Utils;
 
     public interface IContestantFactory
@@ -11,8 +12,8 @@
     {
         public Contestant Create(string rootPath, ContestantConfig config)
         {
-            var fullPath = $"{rootPath}/{config.Id}/{config.Command}";
-            var pc = new ProcessCreator(fullPath);
+            var folder = Path.Combine(rootPath, config.Id);
+            var pc = new ProcessCreator(folder, config.Command);
             var process = pc.Create(error => { });
             if (process == null)
             {

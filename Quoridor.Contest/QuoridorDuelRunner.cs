@@ -33,7 +33,6 @@
                 var activePlayer = game.ActiveColor == Color.Black ? blackPlayer : whitePlayer;
                 var passivePlayer = activePlayer == blackPlayer ? whitePlayer : blackPlayer;
                 
-                Console.WriteLine($"Fetching from {activePlayer.Id}");
                 var command = fetcher.FetchNextCommand(Logger, activePlayer.Output);
                 if (command == null)
                 {

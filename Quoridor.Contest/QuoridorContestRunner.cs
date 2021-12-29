@@ -32,7 +32,7 @@
                 $"{duelData.Group}/{duelData.FirstContestant.Id}-vs-{duelData.SecondContestant.Id}.log";
             var logFile = new FileTarget("logfile") { FileName = fileName };
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logFile);
-            
+
             var logConsole = new ConsoleTarget("logconsole");
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logConsole);
 
@@ -43,43 +43,43 @@
         {
             // yield return new GroupConfig()
             // {
-            //     GroupLetter = "A",
-            //     Contestants = new List<ContestantConfig>()
-            //     {
-            //         config.GetContestantById("mike"),
-            //         config.GetContestantById("madagaskar"),
-            //         config.GetContestantById("alpha"),
-            //         config.GetContestantById("whiskey"),
-            //         config.GetContestantById("india"),
-            //         config.GetContestantById("romeo"),
-            //     }
+                // GroupLetter = "A",
+                // Contestants = new List<ContestantConfig>()
+                // {
+                    // config.GetContestantById("casablanca"),
+                    // config.GetContestantById("mike"),
+                    // config.GetContestantById("whiskey"),
+                    // config.GetContestantById("toronto"),
+                    // config.GetContestantById("yankee"),
+                    // config.GetContestantById("yokohama"),
+                // }
             // };
 
-            // yield return new GroupConfig()
-            // {
-            //     GroupLetter = "B",
-            //     Contestants = new List<ContestantConfig>()
-            //     {
-            //         config.GetContestantById("xmas"),
-            //         config.GetContestantById("casablanca"),
-            //         config.GetContestantById("juilett"),
-            //         config.GetContestantById("bravo"),
-            //         config.GetContestantById("florida"),
-            //         config.GetContestantById("victor"),
-            //     }
-            // };
-
+            yield return new GroupConfig()
+            {
+                GroupLetter = "B",
+                Contestants = new List<ContestantConfig>()
+                {
+                    config.GetContestantById("miku"),
+                    config.GetContestantById("foxtrot"),
+                    config.GetContestantById("xmas"),
+                    config.GetContestantById("oslo"),
+                    config.GetContestantById("king"),
+                    config.GetContestantById("madagaskar"),
+                }
+            };
+            
             yield return new GroupConfig()
             {
                 GroupLetter = "C",
                 Contestants = new List<ContestantConfig>()
                 {
-                    config.GetContestantById("milku"),
-                    config.GetContestantById("oslo"),
-                    config.GetContestantById("queen"),
-                    config.GetContestantById("jerusalem"),
                     config.GetContestantById("paris"),
-                    config.GetContestantById("toronto"),
+                    config.GetContestantById("romeo"),
+                    config.GetContestantById("alpha"),
+                    config.GetContestantById("juilett"),
+                    config.GetContestantById("bravo"),
+                    config.GetContestantById("tango"),
                 }
             };
 
@@ -88,11 +88,11 @@
                 GroupLetter = "D",
                 Contestants = new List<ContestantConfig>()
                 {
-                    config.GetContestantById("yankee"),
-                    config.GetContestantById("foxtrot"),
-                    config.GetContestantById("november"),
-                    config.GetContestantById("delta"),
-                    config.GetContestantById("yokohama"),
+                    config.GetContestantById("charlie"),
+                    config.GetContestantById("golf"),
+                    config.GetContestantById("india"),
+                    config.GetContestantById("sierra"),
+                    config.GetContestantById("hotel"),
                     config.GetContestantById("kilo"),
                 }
             };
@@ -102,12 +102,12 @@
                 GroupLetter = "E",
                 Contestants = new List<ContestantConfig>()
                 {
+                    config.GetContestantById("santiago"),
+                    config.GetContestantById("jerusalem"),
                     config.GetContestantById("oscar"),
-                    config.GetContestantById("zurich"),
-                    config.GetContestantById("king"),
-                    config.GetContestantById("charlie"),
-                    config.GetContestantById("sierra"),
-                    config.GetContestantById("hotel"),
+                    config.GetContestantById("november"),
+                    config.GetContestantById("queen"),
+                    config.GetContestantById("delta"),
                 }
             };
         }
@@ -201,7 +201,7 @@
                     },
                     new()
                     {
-                        Id = "milku",
+                        Id = "miku",
                         Command = "lima.exe"
                     },
                     new()
@@ -273,6 +273,21 @@
                     {
                         Id = "toronto",
                         Command = "Quoridor.exe"
+                    },
+                    new()
+                    {
+                        Id = "tango",
+                        Command = "ConsoleChessApp2.exe"
+                    },
+                    new()
+                    {
+                        Id = "golf",
+                        Command = "QuoridorBotGolf.exe"
+                    },
+                    new()
+                    {
+                        Id = "santiago",
+                        Command = "QuoridorAI.exe"
                     },
                 }
             };

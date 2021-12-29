@@ -14,7 +14,6 @@ namespace IntroToGameDev.AiTester
             while (IsComment(nextCommand))
             {
                 nextCommand = new TimedOutReader(sr).ReadLine(5000);
-                Console.WriteLine($"Command is {nextCommand}");
                 if (nextCommand != null && nextCommand.StartsWith("//"))
                 {
                     logger.Log(LogLevel.Info, nextCommand);
