@@ -28,6 +28,7 @@
                 var process = Process.Start(args.First(), args.Skip(1));
                 Process.Start(new ProcessStartInfo(args.First()));
 
+                Environment.SetEnvironmentVariable("TIME_PER_MOVE", "4500");
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.WorkingDirectory = Directory.GetParent(args.First()).FullName;
                 process.StartInfo.RedirectStandardError = true;

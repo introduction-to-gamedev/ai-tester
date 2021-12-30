@@ -43,73 +43,73 @@
         {
             // yield return new GroupConfig()
             // {
-                // GroupLetter = "A",
-                // Contestants = new List<ContestantConfig>()
-                // {
-                    // config.GetContestantById("casablanca"),
-                    // config.GetContestantById("mike"),
-                    // config.GetContestantById("whiskey"),
-                    // config.GetContestantById("toronto"),
-                    // config.GetContestantById("yankee"),
-                    // config.GetContestantById("yokohama"),
-                // }
+            // GroupLetter = "A",
+            // Contestants = new List<ContestantConfig>()
+            // {
+            // config.GetContestantById("casablanca"),
+            // config.GetContestantById("mike"),
+            // config.GetContestantById("whiskey"),
+            // config.GetContestantById("toronto"),
+            // config.GetContestantById("yankee"),
+            // config.GetContestantById("yokohama"),
+            // }
             // };
 
-            yield return new GroupConfig()
-            {
-                GroupLetter = "B",
-                Contestants = new List<ContestantConfig>()
-                {
-                    config.GetContestantById("miku"),
-                    config.GetContestantById("foxtrot"),
-                    config.GetContestantById("xmas"),
-                    config.GetContestantById("oslo"),
-                    config.GetContestantById("king"),
-                    config.GetContestantById("madagaskar"),
-                }
-            };
-            
+            // yield return new GroupConfig()
+            // {
+            //     GroupLetter = "B",
+            //     Contestants = new List<ContestantConfig>()
+            //     {
+            //         config.GetContestantById("miku"),
+            //         config.GetContestantById("foxtrot"),
+            //         config.GetContestantById("xmas"),
+            //         config.GetContestantById("oslo"),
+            //         config.GetContestantById("king"),
+            //         config.GetContestantById("madagaskar"),
+            //     }
+            // };
+            //
             yield return new GroupConfig()
             {
                 GroupLetter = "C",
                 Contestants = new List<ContestantConfig>()
                 {
-                    config.GetContestantById("paris"),
-                    config.GetContestantById("romeo"),
-                    config.GetContestantById("alpha"),
-                    config.GetContestantById("juilett"),
-                    config.GetContestantById("bravo"),
-                    config.GetContestantById("tango"),
-                }
-            };
-
-            yield return new GroupConfig()
-            {
-                GroupLetter = "D",
-                Contestants = new List<ContestantConfig>()
-                {
-                    config.GetContestantById("charlie"),
-                    config.GetContestantById("golf"),
-                    config.GetContestantById("india"),
-                    config.GetContestantById("sierra"),
-                    config.GetContestantById("hotel"),
+                    // config.GetContestantById("paris"),
+                    // config.GetContestantById("romeo"),
                     config.GetContestantById("kilo"),
+                    // config.GetContestantById("juilett"),
+                    // config.GetContestantById("bravo"),
+                    config.GetContestantById("oscar"),
                 }
             };
 
-            yield return new GroupConfig()
-            {
-                GroupLetter = "E",
-                Contestants = new List<ContestantConfig>()
-                {
-                    config.GetContestantById("santiago"),
-                    config.GetContestantById("jerusalem"),
-                    config.GetContestantById("oscar"),
-                    config.GetContestantById("november"),
-                    config.GetContestantById("queen"),
-                    config.GetContestantById("delta"),
-                }
-            };
+            // yield return new GroupConfig()
+            // {
+            // GroupLetter = "D",
+            // Contestants = new List<ContestantConfig>()
+            // {
+            // config.GetContestantById("charlie"),
+            // config.GetContestantById("golf"),
+            // config.GetContestantById("india"),
+            // config.GetContestantById("sierra"),
+            // config.GetContestantById("hotel"),
+            // config.GetContestantById("kilo"),
+            // }
+            // };
+
+            // yield return new GroupConfig()
+            // {
+            //     GroupLetter = "E",
+            //     Contestants = new List<ContestantConfig>()
+            //     {
+            //         config.GetContestantById("santiago"),
+            //         config.GetContestantById("jerusalem"),
+            //         config.GetContestantById("oscar"),
+            //         config.GetContestantById("november"),
+            //         config.GetContestantById("queen"),
+            //         config.GetContestantById("delta"),
+            //     }
+            // };
         }
 
         private static ContestConfig PrepareConfig()
@@ -202,7 +202,7 @@
                     new()
                     {
                         Id = "miku",
-                        Command = "lima.exe"
+                        Command = "lima.exe \"set TIME_PER_MOVE=4500\""
                     },
                     new()
                     {
