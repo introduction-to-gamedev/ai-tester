@@ -15,12 +15,21 @@
         {
             var config = PrepareConfig();
             var groups = GetGroups(config).ToList();
-            await new Contest<QuoridorDuelRunner>(config, new GroupDuelsProvider(groups),
-                data =>
-                {
-                    SetUpLoggingFor(data);
-                    return LogManager.LogFactory.GetLogger("Logger");
-                }).Execute();
+            await new Contest<QuoridorDuelRunner>(config, new PlayoffDuelProvider("1-8", new List<(ContestantConfig, ContestantConfig)>()
+            {
+                (config.GetContestantById("zurich"), config.GetContestantById("kilo")),
+                (config.GetContestantById("yokohama"), config.GetContestantById("queen")),
+                (config.GetContestantById("madagaskar"), config.GetContestantById("alpha")),
+                (config.GetContestantById("romeo"), config.GetContestantById("sierra")),
+                (config.GetContestantById("victor"), config.GetContestantById("mike")),
+                (config.GetContestantById("charlie"), config.GetContestantById("miku")),
+                (config.GetContestantById("florida"), config.GetContestantById("paris")),
+                (config.GetContestantById("jerusalem"), config.GetContestantById("yankee")),
+            }), data =>
+            {
+                SetUpLoggingFor(data);
+                return LogManager.LogFactory.GetLogger("Logger");
+            }).Execute();
         }
 
 

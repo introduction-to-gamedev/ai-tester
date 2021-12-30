@@ -23,7 +23,7 @@
                     Group = stage,
                     FirstContestant = pair.Item1,
                     SecondContestant = pair.Item2,
-                    TotalMatchesToPlay = 3
+                    TotalMatchesToPlay = 5
                 };
             }
         }
